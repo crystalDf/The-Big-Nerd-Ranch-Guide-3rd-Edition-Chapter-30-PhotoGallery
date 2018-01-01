@@ -14,6 +14,9 @@ public class Photo {
     @SerializedName("url_s")
     private String mUrlS;
 
+    @SerializedName("owner")
+    private String mOwner;
+
     public String getId() {
         return mId;
     }
@@ -36,5 +39,13 @@ public class Photo {
 
     public void setUrlS(String urlS) {
         mUrlS = urlS;
+    }
+
+    public String getOwner() {
+        return mOwner;
+    }
+
+    public void setOwner(String owner) {
+        mOwner = owner;
     }
 }

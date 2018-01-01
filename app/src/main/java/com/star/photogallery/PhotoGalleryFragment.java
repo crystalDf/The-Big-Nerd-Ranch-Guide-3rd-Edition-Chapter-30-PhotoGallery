@@ -2,6 +2,7 @@ package com.star.photogallery;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -246,11 +247,20 @@ public class PhotoGalleryFragment extends VisibleFragment {
     private class PhotoHolder extends RecyclerView.ViewHolder {
 
         private ImageView mItemImageView;
+        private GalleryItem mGalleryItem;
 
         public PhotoHolder(View itemView) {
             super(itemView);
 
             mItemImageView = itemView.findViewById(R.id.photo_gallery_item_image_view);
+            itemView.setOnClickListener(v -> {
+
+                Log.i(TAG, "Page Uri: " + mGalleryItem.getPhotoPageUri().toString());
+
+                Intent intent = PhotoPageActivity.newIntent(getActivity(),
+                        mGalleryItem.getPhotoPageUri());
+                startActivity(intent);
+            });
         }
 
         public void bindGalleryItem(GalleryItem item) {
@@ -258,6 +268,7 @@ public class PhotoGalleryFragment extends VisibleFragment {
                     .load(item.getUrl())
                     .apply(new RequestOptions().placeholder(R.drawable.emma))
                     .into(mItemImageView);
+            mGalleryItem = item;
         }
     }
 
